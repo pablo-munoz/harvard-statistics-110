@@ -164,3 +164,71 @@ print('(b) Fred can make {} different schedules without eating at the same'
 #+RESULTS:
 : (a) Fred can make 30240 different schedules without eating at the sameplace twice
 : (b) Fred can make 65610 different schedules without eating at the sameplace consecutively
+* Ex 4
+#+BEGIN_QUOTE
+A round robin tournament is being held with n tennis players; this
+means that every player will play against every other player exactly
+once.
+
+(a) How many possible outcomes are there for the tournament (the
+outcome lists out who won and lost teach game).
+
+(b) How many games are played in total?
+#+END_QUOTE
+
+I think for this problem I rather solve the questions in reverse
+order.
+
+(b) Each player will play against each other, so n(n-1) gets close,
+but we are overcounting by a factor of 2, so there will be
+\frac{n(n-1)}{2} games.
+
+(a) I think we can make more sense of this by labeling the players
+from each match as player 1 and player 2, and if we let 1 represent
+that player a won the match (and b lost) and zero to represent that
+player a lost the match (and b won). So there are 2^m possible
+outcomes.
+
+Let's verify this for some small n.
+
+For n = 2, we have 2(2-1)/2 = 2(1)/2 = 1 games.
+And 2^1 outcomes, either player 1 wins or player 2 wins.
+
+For n = 3, we have 3(2)/2 = 3 games:
+
+- 1 vs 2
+- 1 vs 3
+- 2 vs 3
+  
+And 2^3 = 8 possible outcomes.
+
+- 1 beats 2, and 1 beats 3, and 2 beats 3
+- 1 beats 2, and 1 beats 3, and 2 loses 3
+- 1 beats 2, and 1 loses 3, and 2 beats 3
+- 1 beats 2, and 1 loses 3, and 2 loses 3
+- 1 loses 2, and 1 beats 3, and 2 beats 3
+- 1 loses 2, and 1 beats 3, and 2 loses 3
+- 1 loses 2, and 1 loses 3, and 2 beats 3
+- 1 loses 2, and 1 loses 3, and 2 loses 3
+
+  
+Now by induction for (b). If we have n players and we add 1, each of
+the previous players needs to play this new player, so the number of
+games increases by n (in our example, when we went from 2 to 3 players
+we went from 1 to 1+2 = 3 matches).
+
+We want to prove that matches(n+1) = matches(n)+n
+
+matches(n+1) = ((n+1)(n+1-1))/2 = ((n+1)(n))/2 = (n^2 + n)/2
+but
+matches(n+1) = matches(n)+n = (n(n-1))/2 + n = (n^2 - n)/2 + n = (n^2 - n + 2n)/2 = (n^2 + n)/2
+Q.E.D
+
+By induction for (a). If we have n players, we have 2^matches(n)
+outcomes, adding another player adds n outcomes more (since every
+current player will play the new player and eather beat him or lose to
+him).
+
+outcomes(n+1) = 2^matches(n+1) = 2^((n^2 + n)/2)
+outcomes(n+1) = 2^matches(n) + n = 2^((n(n-1))/2 + n) = 2^((n^2 -n)/2 + n) = 2^((n^2 -n + 2n)/2) = 2^((n^2 + n)/2)
+Q.E.D
