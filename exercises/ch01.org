@@ -187,7 +187,7 @@ but we are overcounting by a factor of 2, so there will be
 from each match as player 1 and player 2, and if we let 1 represent
 that player a won the match (and b lost) and zero to represent that
 player a lost the match (and b won). So there are 2^m possible
-outcomes.
+outcomes where m is the number of matches.
 
 Let's verify this for some small n.
 
