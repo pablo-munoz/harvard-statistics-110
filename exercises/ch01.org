@@ -220,8 +220,11 @@ we went from 1 to 1+2 = 3 matches).
 We want to prove that matches(n+1) = matches(n)+n
 
 matches(n+1) = ((n+1)(n+1-1))/2 = ((n+1)(n))/2 = (n^2 + n)/2
+
 but
+
 matches(n+1) = matches(n)+n = (n(n-1))/2 + n = (n^2 - n)/2 + n = (n^2 - n + 2n)/2 = (n^2 + n)/2
+
 Q.E.D
 
 By induction for (a). If we have n players, we have 2^matches(n)
@@ -230,5 +233,9 @@ current player will play the new player and eather beat him or lose to
 him).
 
 outcomes(n+1) = 2^matches(n+1) = 2^((n^2 + n)/2)
+
+but
+
 outcomes(n+1) = 2^matches(n) + n = 2^((n(n-1))/2 + n) = 2^((n^2 -n)/2 + n) = 2^((n^2 -n + 2n)/2) = 2^((n^2 + n)/2)
+
 Q.E.D
