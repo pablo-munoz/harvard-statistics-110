@@ -95,3 +95,72 @@ print('(b): There are {} phone numbers with 911 restriction'.format(dfs_count_91
 #+RESULTS:
 : (a): There are 8000000 phone numbers
 : (b): There are 7990000 phone numbers with 911 restriction
+* Ex 3
+#+BEGIN_QUOTE
+Fred is planning to go to dinner each night of a certain week, Monday
+through Friday, with each dinner being at one of his ten favorite
+restaurants.
+
+(a) How many possibilities are there for Fred's schedule of dinners
+for Monday through Friday, if Fred is not willing to eat at the same
+restaurant more than once?
+
+(b) How many possibilities are there for Fred's schedule of dinners
+for that Monday through Friday, if Fred is willing to eat at the same
+restaurant more than once, but not willing to eat at the same place
+twice in a row (or more).
+#+END_QUOTE
+
+(a) is simple enough. The answer is 10 perm 5. Since the first day he
+can choose from 10 restaurants, the second day from 9, the third from
+8, and so on. The final answer is 30240.
+
+(b) is a bit different. On Monday he can choose from 10
+restaurants. On Tuesday he cannot choose the restaurant of the day
+before, so he has 9 choices. On Wednesday he can choose the restaurant
+from Monday again, but cannot choose the restaurant from Tuesday. On
+Thursday he can choose the restaurant from Tuesday again, but not the
+one from Wednesday. We see that each day one restaurant becomes
+blacklisted while the previously blacklisted one becomes available
+again, leaving the number of choices unchanged but always being one
+less than the initial number of choices on Monday, so the result must
+be (10)(9^4) = 65610.
+
+Python validation script:
+
+#+BEGIN_SRC python :results output :exports both
+dinners_count = 5
+restaurants = list(range(10)) # Label restaurants 0, 1, 2, 3, ..., 9
+
+def ways_to_schedule_dinner_a(schedule):
+    if len(schedule) == dinners_count:
+        return 1
+
+    count = 0
+    for rest in restaurants:
+        if rest not in schedule:
+            count += ways_to_schedule_dinner_a(schedule + [rest])
+
+    return count
+
+def ways_to_schedule_dinner_b(schedule):
+    if len(schedule) == dinners_count:
+        return 1
+
+    count = 0
+    for rest in restaurants:
+        if len(schedule) == 0 or rest != schedule[-1]:
+            count += ways_to_schedule_dinner_b(schedule + [rest])
+
+    return count
+
+print('(a) Fred can make {} different schedules without eating at the same'
+      'place twice'.format(ways_to_schedule_dinner_a([])))
+
+print('(b) Fred can make {} different schedules without eating at the same'
+      'place consecutively'.format(ways_to_schedule_dinner_b([])))
+#+END_SRC
+
+#+RESULTS:
+: (a) Fred can make 30240 different schedules without eating at the sameplace twice
+: (b) Fred can make 65610 different schedules without eating at the sameplace consecutively
