@@ -228,14 +228,16 @@ matches(n+1) = matches(n)+n = (n(n-1))/2 + n = (n^2 - n)/2 + n = (n^2 - n + 2n)/
 Q.E.D
 
 By induction for (a). If we have n players, we have 2^matches(n)
-outcomes, adding another player adds n outcomes more (since every
-current player will play the new player and eather beat him or lose to
-him).
+outcomes, adding another player adds 2^n outcomes to every already
+possible outcome (since for each possible outcome, still every player
+will play the new player and either beat him or lose to him).
+
+We want to prove that outcomes(n+1) = outcomes(n)(2^n)
 
 outcomes(n+1) = 2^matches(n+1) = 2^((n^2 + n)/2)
 
 but
 
-outcomes(n+1) = 2^matches(n) + n = 2^((n(n-1))/2 + n) = 2^((n^2 -n)/2 + n) = 2^((n^2 -n + 2n)/2) = 2^((n^2 + n)/2)
+outcomes(n+1) = 2^matches(n)(2^n) = 2^((n(n-1))/2)(2^n) = 2^((n^2 -n)/2 + n) = 2^((n^2 -n + 2n)/2) = 2^((n^2 + n)/2)
 
 Q.E.D
