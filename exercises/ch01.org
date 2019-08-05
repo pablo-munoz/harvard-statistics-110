@@ -181,7 +181,7 @@ order.
 
 (b) Each player will play against each other, so n(n-1) gets close,
 but we are overcounting by a factor of 2, so there will be
-\frac{n(n-1)}{2} games.
+(n(n-1))/2 games.
 
 (a) I think we can make more sense of this by labeling the players
 from each match as player 1 and player 2, and if we let 1 represent
