@@ -37,3 +37,61 @@ print('There are {} ways to permute {}'.format(count, word))
 
 #+RESULTS:
 : There are 34650 ways to permute MISSISSIPPI
+
+* Ex 2
+#+BEGIN_QUOTE
+(a) How many 7-digit phone numbers are possible, assuming that the
+first digit can't be a 0 or a 1?
+
+(b) Re-solve (a), except now assume also thaat the phone number is not
+allowed to start with 911 (since this is reserved for emergency use
+and it would not be desirable for the system to wait and see whether
+more digits were going to be dialed after someone has dialed 911)
+ #+END_QUOTE
+
+We can think of this as sampling with replacement, plus some
+additional constraints.
+
+(a) = (8)(10^6) = 8000000
+(b) = (8)(10^6) - 10^4 = 7990000 
+
+Python verification script:
+
+#+BEGIN_SRC python :results output export both
+def dfs_count(k, length):
+    if k == length:
+        return 1
+
+    count = 0
+    lower = 0
+    if k == 0:
+        lower = 2
+    for digit in range(lower, 10):
+        count += dfs_count(k+1, length)
+
+    return count
+
+def dfs_count_911(digits, length):
+    if len(digits) == length:
+        return 1
+
+    if ''.join(map(str, digits)) == '911':
+        return 0
+
+    count = 0
+    lower = 0
+    if len(digits) == 0:
+        lower = 2
+    for digit in range(lower, 10):
+        count += dfs_count_911(digits + [digit], length)
+
+    return count
+    
+
+print('(a): There are {} phone numbers'.format(dfs_count(0, 7)))
+print('(b): There are {} phone numbers with 911 restriction'.format(dfs_count_911([], 7)))
+#+END_SRC
+
+#+RESULTS:
+: (a): There are 8000000 phone numbers
+: (b): There are 7990000 phone numbers with 911 restriction
