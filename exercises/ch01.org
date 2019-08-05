@@ -57,7 +57,7 @@ additional constraints.
 
 Python verification script:
 
-#+BEGIN_SRC python :results output export both
+#+BEGIN_SRC python :results output :exports both
 def dfs_count(k, length):
     if k == length:
         return 1
