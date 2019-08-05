@@ -3,14 +3,12 @@
 How many ways are there to permute the letters in the word MISSISSIPPI?
 #+END_QUOTE
 
-There are 11 letters in mississippi. The expression $11!$ gets close
+There are 11 letters in mississippi. The expression 11! gets close
 but overcounts by considering different instances of a letter in the
 same position as different events. So we have to adjust for
 overcounting 4 I's, 4 S's and 2 P's. So the result is
 
-#+BEGIN_SRC
-  \frac{11!}{(4!)(4!)(2!)} = 34650
-#+END_SRC
+\frac{11!}{(4!)(4!)(2!)} = 34650
 
 Here is a small python script to verify this result
 
