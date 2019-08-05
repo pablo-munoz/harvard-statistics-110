@@ -16,7 +16,7 @@ overcounting 4 I's, 4 S's and 2 P's. So the result is
 
 Here is a small python script to verify this result
 
-#+BEGIN_SRC python :results output
+#+BEGIN_SRC python :results output :exports result
 from collections import Counter
 
 word = 'MISSISSIPPI'
