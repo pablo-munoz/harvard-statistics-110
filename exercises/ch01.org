@@ -1,0 +1,43 @@
+* Ex 1
+#+BEGIN_QUOTE
+How many ways are there to permute the letters in the word MISSISSIPPI?
+#+END_QUOTE
+
+There are 11 letters in mississippi. The expression $11!$ gets close
+but overcounts by considering different instances of a letter in the
+same position as different events. So we have to adjust for
+overcounting 4 I's, 4 S's and 2 P's. So the result is
+
+#+BEGIN_EXPORT latex
+\begin{align*}
+  \frac{11!}{(4!)(4!)(2!)} = 34650
+\end{align*}
+#+END_EXPORT
+
+Here is a small python script to verify this result
+
+#+BEGIN_SRC python :results output
+from collections import Counter
+
+word = 'MISSISSIPPI'
+n = len(word)
+letter_counts = Counter(word)
+
+def dfs_count(k, letter_counts):
+    if k == n:
+        return 1
+
+    num_ways = 0
+
+    for letter in letter_counts:
+        num_ways += dfs_count(k+1, letter_counts - Counter(letter))
+
+    return num_ways
+
+count = dfs_count(0, letter_counts)
+
+print('There are {} ways to permute {}'.format(count, word))
+#+END_SRC
+
+#+RESULTS:
+: There are 34650 ways to permute MISSISSIPPI
