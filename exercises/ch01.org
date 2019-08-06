@@ -295,3 +295,26 @@ ultimate winner) will have to be eliminated. Players can only be
 eliminated during a game, so there will have to be as many games are
 eliminations. Therefore it is obvious that there'll be 2^n - 1 games,
 which validates our previous result.
+* Ex 6
+#+BEGIN_QUOTE
+There are 20 people at a chess club on a certain day. They each find
+opponents and start playing. How many possibilities are there for how
+they matched up, assuming that in each game it /does/ matter who has
+the white pieces.
+#+END_QUOTE
+
+Let's say we choose who plays white first. So we have 20 choose 10
+possibilities. After choosing who plays white, we permute the
+remaining 10 players so that they pair up with the white players by
+order.
+
+Example:
+
+We choose 1 3 5 7 9 11 13 15 17 19 to play white.
+We permute the rest and get 20 18 16 14 12 10 8 6 4 2
+
+So we pair up 1 and 20, 3 and 18, ..., 19 and 2
+
+So the answer must be (20 choose 10)10! = ((20!)/((10!)(10!)))(10!) = 20!/10!
+
+
