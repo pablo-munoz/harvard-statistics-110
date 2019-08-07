@@ -1,0 +1,112 @@
+* 1 Naive Definition of Probability
+1. For each part decide whether the blank should be filled with =, < or >
+and give a short but clear explanation.
+
+(a) (probability that the total after rolling 4 fair dice is 21) (probability that
+the total after rolling 4 fair dice is 22)
+
+Here we have a > relationship. 4 dice can sum up to 24, so for it to
+sum 21 some dice must have lower number than 6. In fact, the dice that
+are not 6 should total 3 amongst all of them in their difference with
+6. For 22 they need to total 2, so already there's a lower number of
+combinations and the numerator will be smaller.
+
+#+BEGIN_SRC python :results output
+import random
+
+twenty_ones = 0
+twenty_twos = 0
+dice = list(range(1, 7))
+
+for i in range(10000000):
+    res = sum(random.choice(dice) for _ in range(4))
+    if res == 21:
+        twenty_ones += 1
+    elif res == 22:
+        twenty_twos += 1
+
+print('{} 21s vs {} 22s'.format(twenty_ones, twenty_twos))
+#+END_SRC
+
+#+RESULTS:
+: 153840 21s vs 77226 22s
+
+
+(b) (probability that a random 2 letter word is a palindrome1) (probability that
+a random 3 letter word is a palindrome)
+
+The same, since the "endpoints" will always have to be the same
+letter, the middle letter for the 3 letter word case does not affect
+the probability at all.
+
+
+2. A random 5 card poker hand is dealt from a standard deck of cards. Find the
+probability of each of the following (in terms of binomial coecients).
+
+(a) A flush (all 5 cards being of the same suit; do not count a royal
+flush, which is a flush with an Ace, King, Queen, Jack, and 10)
+
+4 x (13 choose 5) - 4
+------------------------
+     52 choose 5
+
+
+(b) Two pair (e.g., two 3’s, two 7’s, and an Ace)
+
+12 x (4 choose 2) + 11 x (4 choose 2)
+--------------------------------------
+            52 choose 5
+
+
+3. (a) How many paths are there from the point (0, 0) to the point (110, 111) in
+the plane such that each step either consists of going one unit up or one unit to the
+right?
+
+In the end 110 steps have to be taken to the right and 111 up at some
+point. We can choose at what steps we go right, and then the steps we
+go up are determined.
+
+221 choose 110
+
+(b) How many paths are there from (0, 0) to (210, 211), where each step consists of
+going one unit up or one unit to the right, and the path has to go through (110, 111)?
+
+Since it's always advancing we can't go left or down, we first have to
+make our way to (110, 111) which is the previous answer. Then for each
+of those ways we have to move 100 right and 100 up, we can employ the
+same logic as before.
+
+(221 choose 110) x (200 choose 100)
+
+4. A norepeatword is a sequence of at least one (and possibly all) of
+   the usual 26 letters a,b,c,. . . ,z, with repetitions not
+   allowed. For example, “course” is a norepeatword, but “statistics”
+   is not. Order matters, e.g., “course” is not the same as “source”.
+
+A norepeatword is chosen randomly, with all norepeatwords equally likely. Show
+that the probability that it uses all 26 letters is very close to 1/e.
+
+
+The different number of ways we can permute 26 letters is 26!. The
+total number of norepeat words is 26! + 26 x 25 x 23 x ... x 3 + 26 x 25 x 23 x ... x 4 + ... + 26
+which is the same as
+
+26!   26!   26!         26!
+--- + --- + --- + ... + ---
+1!    2!    3!          25!
+
+this is the same as
+
+   (  1     1     1           1  )
+26! | --- + --- + --- + ... + --- |
+   (  1!    2!    3!         25! )
+
+which is approximately
+
+26!e
+
+So the ratio of 26 norepeat words to all possible no repeat words is
+
+26!                      1
+---- which approximates  -
+26!e                     e
