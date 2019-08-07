@@ -46,16 +46,19 @@ probability of each of the following (in terms of binomial coecients).
 (a) A flush (all 5 cards being of the same suit; do not count a royal
 flush, which is a flush with an Ace, King, Queen, Jack, and 10)
 
+#+BEGIN_SRC 
 4 x (13 choose 5) - 4
 ------------------------
      52 choose 5
-
+#+END_SRC
 
 (b) Two pair (e.g., two 3’s, two 7’s, and an Ace)
 
+#+BEGIN_SRC 
 12 x (4 choose 2) + 11 x (4 choose 2)
 --------------------------------------
             52 choose 5
+#+END_SRC
 
 
 3. (a) How many paths are there from the point (0, 0) to the point (110, 111) in
@@ -99,9 +102,11 @@ which is the same as
 
 this is the same as
 
+#+BEGIN_SRC 
     (  1     1     1           1  )
 26! | --- + --- + --- + ... + --- |
     (  1!    2!    3!         25! )
+#+END_SRC
 
 which is approximately
 
@@ -109,6 +114,8 @@ which is approximately
 
 So the ratio of 26 norepeat words to all possible no repeat words is
 
+#+BEGIN_SRC 
 26!                      1
 ---- which approximates  -
 26!e                     e
+#+END_SRC
