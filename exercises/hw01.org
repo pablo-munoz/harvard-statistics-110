@@ -97,9 +97,9 @@ which is the same as
 
 this is the same as
 
-   (  1     1     1           1  )
+    (  1     1     1           1  )
 26! | --- + --- + --- + ... + --- |
-   (  1!    2!    3!         25! )
+    (  1!    2!    3!         25! )
 
 which is approximately
 
