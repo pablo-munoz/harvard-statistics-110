@@ -91,11 +91,11 @@ The different number of ways we can permute 26 letters is 26!. The
 total number of norepeat words is 26! + 26 x 25 x 23 x ... x 3 + 26 x 25 x 23 x ... x 4 + ... + 26
 which is the same as
 
-#+BEGIN_QUOTE
+#+BEGIN_SRC 
 26!   26!   26!         26!
 --- + --- + --- + ... + ---
 1!    2!    3!          25!
-#+END_QUOTE
+#+END_SRC
 
 this is the same as
 
