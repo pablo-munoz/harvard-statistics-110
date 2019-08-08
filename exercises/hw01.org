@@ -55,8 +55,8 @@ flush, which is a flush with an Ace, King, Queen, Jack, and 10)
 (b) Two pair (e.g., two 3’s, two 7’s, and an Ace)
 
 #+BEGIN_SRC 
-12 x (4 choose 2) + 11 x (4 choose 2)
---------------------------------------
+12 x (4 choose 2) + 11 x (4 choose 2) x 4
+-----------------------------------------
             52 choose 5
 #+END_SRC
 
