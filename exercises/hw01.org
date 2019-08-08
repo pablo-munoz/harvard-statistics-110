@@ -60,6 +60,16 @@ flush, which is a flush with an Ace, King, Queen, Jack, and 10)
             52 choose 5
 #+END_SRC
 
+My mistake here was that I misunderstood and thought we would always
+have to have an ace. This is not the case, it can be any card (that is
+not already in one of the pairs of course). So the real answer is:
+
+#+BEGIN_SRC 
+(13 choose 2) x (4 choose 2)^2 x 44
+-----------------------------------
+         52 choose 5
+#+END_SRC
+
 
 3. (a) How many paths are there from the point (0, 0) to the point (110, 111) in
 the plane such that each step either consists of going one unit up or one unit to the
@@ -119,3 +129,69 @@ So the ratio of 26 norepeat words to all possible no repeat words is
 ---- which approximates  -
 26!e                     e
 #+END_SRC
+
+* 2 Story Proofs
+5. Give a story proof that \sum_{k=0}^n n \choose k = 2^n.
+   
+Think of n being elements of a set. Think of k as how many ways we can
+make subsets of size k from the set. Since k goes from 0 (1 way the
+empty set) to n (1 way the original set itself). Then we will have
+counted all possible subsets. And the number of possible subsets of a
+set of cardinality n is 2^n.
+   
+
+6. Give a story proof that
+
+#+BEGIN_SRC 
+ (2n)!
+-------- = (2n - 1)(2n - 3)...3*1
+2^n * n!
+#+END_SRC
+
+I couldn't get this at all. The posted answer says to think of taking
+2n people and counting how many ways there are to form n partnerships.
+We can line them up in a row (randomly ordered) and say the first two
+are a pair, the second two are pair to, etc. This is said to overcount
+by 2^n * n!. Which I'm struglling with but I'll accept for now. The
+right side now makes more sense, we randomly choose the first person,
+then there are (2n-1) choices for their partner, then we choose
+another person randomly from the remaining then there are (2n-3)
+persons to be their partner, etc.
+
+
+7. Show that for all positive integers n and k with n >= k
+
+n \choose k + n \choose (k - 1) = (n+1) \choose k
+
+
+Algebraic proof:
+
+#+BEGIN_SRC 
+  n!            n!             (n+1)!
+------   + -------------- = -------------
+k!(n-k)!   (k-1)!(n-k+1)!    k!(n+1-k)!
+
+
+   n!(n-k+1)! + n!k            (n+1)!
+------------------------- = -------------
+    k!(n-k+1)!                k!(n-k+1)!
+
+
+
+n!(n-k+1)! + n!k = (n+1)!
+
+n!n -n!k + n! + n!k = (n+1)!
+
+n!n + n! = (n+1)!
+
+(n + 1)n! = (n+1)! which is true by definition of factorial
+#+END_SRC
+
+
+For the story proof, let's think of the left hand side as the number
+of ways of choosing groups of size k without the designated president
+or groups of size k-1 with the designated president (which when
+account for makes the group of size k) too. The right hand side is
+just that, of a population of n plus the president, it counts how many
+groups of k we can make, some of them will contain the president and
+some will not.
