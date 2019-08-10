@@ -1,4 +1,5 @@
-* 1 Naive Definition of Probability
+* Strategic Practice
+** 1 Naive Definition of Probability
 1. For each part decide whether the blank should be filled with =, < or >
 and give a short but clear explanation.
 
@@ -130,7 +131,7 @@ So the ratio of 26 norepeat words to all possible no repeat words is
 26!e                     e
 #+END_SRC
 
-* 2 Story Proofs
+** 2 Story Proofs
 5. Give a story proof that \sum_{k=0}^n n \choose k = 2^n.
    
 Think of n being elements of a set. Think of k as how many ways we can
@@ -195,3 +196,179 @@ account for makes the group of size k) too. The right hand side is
 just that, of a population of n plus the president, it counts how many
 groups of k we can make, some of them will contain the president and
 some will not.
+
+* Homework 1
+1. A certain family has 6 children, consisting of 3 boys and 3
+   girls. Assuming that all birth orders are equally likely, what is
+   the probability that the 3 eldest children are the 3 girls.
+   
+
+Let's label the children m1, m2, m3, f1, f2, f3 (m for male, f for
+female). The total number of possible birth orders is 6!. There are 3!
+ways to order the three males first, and 3! ways to order the three
+females.
+
+#+BEGIN_SRC 
+                                         (3!)^2
+P(Eldest 3 children are the 3 girls) = ---------- = 0.05 
+                                           6!
+#+END_SRC
+
+
+2. (a) How many ways are there to split a dozen people into 3 teams, where
+   one team has 2 people and the other 2 teams have 5 people each.
+
+We can first choose the team of 2 people (12 choose 2). Then we are
+left with 10 people, we choose 5 to make one team (10 choose 5) and
+the other team is composed the ones that are left. But this over
+counts by 2. So the final answer is
+
+#+BEGIN_SRC 
+(12 choose 2)(10 choose 5)
+--------------------------
+            2
+#+END_SRC
+
+   (b) How many ways are there to split a dozen people into 3 teams,
+   where each team has 4 people?
+   
+We can choose the first team of 4 people (12 choose 4), then we choose
+other 4 for the second team (8 choose 4) and the rest are the third
+team. This second selection has the same issue as the one in (a), it
+overcounts by a factor of 2.
+
+#+BEGIN_SRC 
+(12 choose 4)(8 choose 4)
+--------------------------
+            2
+#+END_SRC
+
+3. A college has 10 (non-overlapping) time slots for its courses, and
+   blithely assigns courses to time slots randomly and independetly. A
+   student randomly chooses 3 of the courses to enroll in (for the
+   PTP, to avoid getting fined). What is the probability that there is
+   a conflict in the student's schedule?
+   
+So there are 2 aspects to this question. How the college assigned the
+courses, and which courses the student picks. We know tha the student
+has chosen 3 randomly, now the question is what is the probability
+that the college had scheduled at least 2 of those 3 courses during
+the same time slot. Since the 3 courses are independently assigned
+time slots and with equal probability, there are 10^3 ways for the
+courses to be assigned to time slots, but only (10)(9)(8) for them to
+not overlap.
+
+#+BEGIN_SRC
+      10(9)(8)
+--------------------- = 0.72
+       10^3
+#+END_SRC
+
+Which is the probability of no conflict, so the probability of a
+conflict is 0.28.
+
+4. A city with 6 districts has 6 robberies in a particular
+   week. Assume the robberies are located randomly, with all
+   possibilities for which robbery occurred where equally likely. What
+   is the probability that some district had more than 1 robbery?
+   
+
+Robberies can repeat in a district (so I'm already thinking replacement).
+
+Number of ways to arrange robbery without repeating district = 6!
+Number of ways to arrange robbery while possibly repeating district = 6^6
+
+P(Some district more than 1 robbery) = 1 - P(Robberies all in different districts)
+
+#+BEGIN_SRC 
+P(Robberies all in different districts) = 6! / (6^36) = 0.0154320987654
+P(Some district more than 1 robbery) = 1 - (6! / (6^36)) = 0.984567901235
+#+END_SRC
+
+5. Elk dwell in a certain forest. There are N elk, of which a simple
+   random sample of size n are captured and tagged ("simple random
+   sample" means that all (N choose n) sets of elk are equally
+   likely). The captured elk are returned to the population and then a
+   new sample is drawn, this time with size m. This is an important
+   method which is widely-used in ecology, known as capture-recapture.
+   
+What is the probability that exactly k of the m elk in the new sample
+were previously tagged? (Assume that an elk that was captured before
+doesn't become more or less likely to be captured again).
+
+After the first capture, n elks will be tagged, and N - n elks will
+not be tagged. In the second captured, we are interested on the
+probability that k were previously tagged, and M - k not tagged. So there
+is some reation between k and n, and between N - n and m - k.
+
+We can think of the number of ways to arrange groups of k out of the n
+elks that were previously tagged. This is the number of instances
+where it happens that k of the m elks chosen in the second round were
+already tagged.
+
+Let's think of labeling the elks. For example for N = 5 we have elks
+
+1 2 3 4 5
+
+And let's think of also labeling in the second round as
+N+first_round_label
+
+So we have
+
+6 7 8 9 10
+
+Then if we have for example n = 3, m = 3, k = 2
+
+We choose (n + m) out of our "extended" sample space.
+
+So we choose 6 out {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+Say we pick {1, 6, 2, 8, 3, 10}
+
+Here elk 1 (which is the same as elk 6) was tagged and chosen again.
+Same thing for elk 2 (which is the same as 8). Then elk 3 was chosen
+in the first round but not in the second, elk 5 was chosen instead in
+this round.
+
+#+BEGIN_SRC 
+     (n choose k)(N - n choose m - k)
+--------------------------------------
+         (2N choose n+m)
+#+END_SRC
+
+6. A jar contains r red balls and g green balls, where r and g are
+   fixed positive integers. A ball is drawn from the jar randomly
+   (with all possibilities equally likely), and then a second ball is
+   drawn randomly.
+
+(a) Explain intuitively why the probability of the second ball being
+green is the same as the probability of the first ball being green.
+
+Because if the first draw was green, for the second draw there is less
+probability of it being green. But if the first draw was not green,
+then the second draw has more probability of being green, so it kind
+of evens out.
+
+(b) Define notation for the sample space of the problem, and use this
+to compute the probabilities from (a) and show that they are the same.
+
+#+BEGIN_SRC 
+P(G1) = g/(r + g)
+P(G2) = P(G1)(g-1)/(r+g-1) + (1-P(G1))(g)/(r+g-1)
+         g  g-1       r   g       g(g-1) + rg      g(r+g-1)       g
+P(G2) = --- ------ + --- ----- = -------------- = ------------ = ----
+        r+g r+g-1    r+g r+g-1    (r+g)(r+g-1)    (r+g)(r+g-1)   (r+g)
+#+END_SRC
+
+(c) Suppose that there are 16 balls in total, and that the probability
+that the two balls are the same color is the same as the probability
+they are different colors. What are r and g (list all possibilities)?
+
+r = g = 8
+
+7. (a) Show a story proof using that ...
+
+where n and k are positive integers with n >= k
+
+Hint: Imagine arranging a troup of people by age, and then think about
+the oldest person in each subgroup.
